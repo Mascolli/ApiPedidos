@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ApiPedidos.Models
 {
-    public class ItemPedido
+    public class ItensPedido
     {
         [Key]
         public int Id { get; set; }
@@ -14,7 +15,7 @@ namespace ApiPedidos.Models
         public int Quantidade { get; set; }
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço unitário deve ser maior que zero.")]
         public decimal PrecoUnitario { get; set; }
-
+        [JsonIgnore]
         public Pedido? Pedido { get; set; }
     }
 }

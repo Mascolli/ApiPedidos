@@ -19,7 +19,7 @@ namespace ApiPedidos.Services.Cliente
             {
                 var cliente = await _context.Clientes.FirstOrDefaultAsync(a => a.Id == id);
 
-                if(cliente == null)
+                if (cliente == null)
                 {
                     response.Mensagem = "Nenhum registro encontrado!";
                 }

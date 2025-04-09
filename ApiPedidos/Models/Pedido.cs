@@ -15,11 +15,11 @@ namespace ApiPedidos.Models
         public DateTime DataCriacao { get; set; }
 
         [JsonIgnore]
-        public ICollection<ItemPedido> Itens { get; set; }
+        public ICollection<ItensPedido> Itens { get; set; }
 
         public Pedido()
         {
-            Itens = new List<ItemPedido>();
+            Itens = new List<ItensPedido>();
             DataCriacao = DateTime.Now;
             Status = StatusPedido.Pendente;
         }

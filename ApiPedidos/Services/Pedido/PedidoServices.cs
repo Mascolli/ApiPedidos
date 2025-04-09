@@ -13,7 +13,7 @@ namespace ApiPedidos.Services.Pedido
             _context = context;
         }
 
-        public async Task<Response<List<Models.Pedido>>> AlterarStatusPedido(AlterarStatusDto alterarStatusDto)
+        public async Task<Response<List<Models.Pedido>>> AlterarStatusPedido(PedidoAlterarStatusDto alterarStatusDto)
         {
             Response<List<Models.Pedido>> response = new Response<List<Models.Pedido>>();
 

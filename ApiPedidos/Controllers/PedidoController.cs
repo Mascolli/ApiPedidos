@@ -31,7 +31,7 @@ namespace ApiPedidos.Controllers
         }
 
         [HttpPatch("AlterarStatusPedido")]
-        public async Task<ActionResult<Response<List<Pedido>>>> AlterarStatusPedido(AlterarStatusDto alterarStatusDto)
+        public async Task<ActionResult<Response<List<Pedido>>>> AlterarStatusPedido(PedidoAlterarStatusDto alterarStatusDto)
         {
             var pedido = await _pedidoInterface.AlterarStatusPedido(alterarStatusDto);
             return Ok(pedido);

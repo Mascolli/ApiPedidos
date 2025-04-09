@@ -10,7 +10,7 @@ namespace ApiPedidos.Data
         }
 
         public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<ItemPedido> ItemPedidos { get; set; }
+        public DbSet<ItensPedido> ItemPedidos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
     }
 }

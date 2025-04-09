@@ -2,7 +2,7 @@
 
 namespace ApiPedidos.DTO.Pedido
 {
-    public class AlterarStatusDto
+    public class PedidoAlterarStatusDto
     {
         public int Id { get; set; }
         public StatusPedido Status { get; set; }

@@ -1,5 +1,6 @@
 using ApiPedidos.Data;
 using ApiPedidos.Services.Cliente;
+using ApiPedidos.Services.ItensPedido;
 using ApiPedidos.Services.Pedido;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPedidoInterface, PedidoServices>();
 builder.Services.AddScoped<IClienteInterface, ClienteServices>();
+builder.Services.AddScoped<IItensPedidoInterface, ItensPedidoServices>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -24,7 +26,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("pedidosApi", builder =>
     {
-        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
     });
 });
 

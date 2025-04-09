@@ -8,7 +8,7 @@ namespace ApiPedidos.Services.Pedido
         Task<Response<List<Models.Pedido>>> ListarPedido();
         Task<Response<List<Models.Pedido>>> CriarPedido(PedidoCriacaoDto pedidoCriacaoDto);
         Task<Response<List<Models.Pedido>>> ExcluirPedido(int id);
-        Task<Response<List<Models.Pedido>>> AlterarStatusPedido(AlterarStatusDto alterarStatusDto);
+        Task<Response<List<Models.Pedido>>> AlterarStatusPedido(PedidoAlterarStatusDto alterarStatusDto);
 
     }
 }

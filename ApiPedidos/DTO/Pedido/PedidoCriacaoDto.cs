@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ApiPedidos.DTO.Pedido
+﻿namespace ApiPedidos.DTO.Pedido
 {
     public class PedidoCriacaoDto
     {

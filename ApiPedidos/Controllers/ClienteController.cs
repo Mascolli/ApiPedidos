@@ -1,6 +1,5 @@
 ﻿using ApiPedidos.Models;
 using ApiPedidos.Services.Cliente;
-using ApiPedidos.Services.Pedido;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPedidos.Controllers
