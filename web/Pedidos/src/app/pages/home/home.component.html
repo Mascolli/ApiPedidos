@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <button class="btn btn-success w-100">Criar novo pedido.</button>
+    <button class="btn btn-success w-100" [routerLink]="['/criar-pedido']">Criar novo pedido.</button>
     <div>
         <label class="form-label">Pesquisar:</label>
         <input class="form-control" type="text" placeholder="Qual pedido deseja buiscar?"(input)="search($event)"/>
@@ -37,7 +37,9 @@
                 }
 
             } @else {
-                <tr><td colspan="6">Nenhum pedido encontrado.</td></tr>
+                <tr class="text-center">
+                    <td colspan="7">Nenhum pedido encontrado.</td>
+                </tr>
               }
 
         </tbody>

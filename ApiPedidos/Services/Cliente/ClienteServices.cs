@@ -37,5 +37,27 @@ namespace ApiPedidos.Services.Cliente
                 return response;
             }
         }
+
+        public async Task<Response<List<Models.Cliente>>> ListarClientes()
+        {
+            Response<List<Models.Cliente>> response = new Response<List<Models.Cliente>>();
+
+            try
+            {
+                var clientes = await _context.Clientes.ToListAsync();
+                response.Dados = clientes;
+                response.Mensagem = "Clientes localizados.";
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                response.Mensagem = ex.Message;
+                response.Status = false;
+
+                return response;
+            }
+        }
     }
 }

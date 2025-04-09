@@ -1,21 +1,24 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs'
-import { PedidoListar } from '../models/Pedido';
-import { Response } from '../models/Response';
+  import { Injectable } from '@angular/core';
+  import { environment } from '../../environments/environment.development';
+  import { HttpClient } from '@angular/common/http';
+  import { Observable } from 'rxjs'
+  import { PedidoListar } from '../models/Pedido';
+  import { Response } from '../models/Response';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class PedidoService {
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class PedidoService {
 
-  ApiUrl = environment.UrlApi;
+    ApiUrl = environment.UrlApi;
 
-  constructor(private http : HttpClient) { }
+    constructor(private http : HttpClient) { }
 
-  GetPedidos(): Observable<Response<PedidoListar[]>>{
-    return this.http.get<Response<PedidoListar[]>>(this.ApiUrl);
+    GetPedidos(): Observable<Response<PedidoListar[]>>{
+      return this.http.get<Response<PedidoListar[]>>(`${this.ApiUrl}api/Pedido/ListarPedidos`);
+    }
 
+    DeletarPedido(id: number): Observable<Response<PedidoListar[]>>{
+      return this.http.delete<Response<PedidoListar[]>>(`${this.ApiUrl}api/Pedido/ExcluirPedido?id=${id}`);
+    }
   }
-}

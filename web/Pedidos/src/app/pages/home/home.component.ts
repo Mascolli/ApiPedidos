@@ -7,11 +7,12 @@ import { ClienteService } from '../../services/cliente.service';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PedidoStatus } from '../../enums/pedido-status';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
       const clienteObservables: Observable<{ pedido: PedidoListar; cliente: ClienteListar }>[] = [];
 
       pedidos.forEach(pedido => {
-        const clienteObservable = this.serviceCliente.GetCliente(pedido.clienteId).pipe(
+        const clienteObservable = this.serviceCliente.GetClientePorId(pedido.clienteId).pipe(
           map(cliente => ({ pedido, cliente }))
         );
         clienteObservables.push(clienteObservable);
@@ -61,6 +62,8 @@ export class HomeComponent implements OnInit {
   }
 
   deletar(id: number){
-
+    this.servicePedidos.DeletarPedido(id).subscribe(response=>{
+      window.location.reload();
+    })
   }
 }

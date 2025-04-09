@@ -1,5 +1,6 @@
 ﻿using ApiPedidos.Models;
 using ApiPedidos.Services.Cliente;
+using ApiPedidos.Services.Pedido;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPedidos.Controllers
@@ -19,6 +20,13 @@ namespace ApiPedidos.Controllers
         {
             var cliente = await _clienteInterface.ListarClientePorId(id);
             return Ok(cliente);
+        }
+
+        [HttpGet("ListarClientes")]
+        public async Task<ActionResult<Response<List<Cliente>>>> ListarClientes()
+        {
+            var pedido = await _clienteInterface.ListarClientes();
+            return Ok(pedido);
         }
     }
 }
