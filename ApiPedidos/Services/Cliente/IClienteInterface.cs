@@ -1,4 +1,5 @@
-﻿using ApiPedidos.Models;
+﻿using ApiPedidos.DTO.Cliente;
+using ApiPedidos.Models;
 
 namespace ApiPedidos.Services.Cliente
 {
@@ -6,5 +7,6 @@ namespace ApiPedidos.Services.Cliente
     {
         Task<Response<Models.Cliente>> ListarClientePorId(int id);
         Task<Response<List<Models.Cliente>>> ListarClientes();
+        Task<Response<List<Models.Cliente>>> CadastrarCliente(CadastrarClienteDto cadastrarClienteDto);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ApiPedidos.Data;
+using ApiPedidos.DTO.Cliente;
 using ApiPedidos.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,35 @@ namespace ApiPedidos.Services.Cliente
         {
             _context = context;
         }
+
+        public async Task<Response<List<Models.Cliente>>> CadastrarCliente(CadastrarClienteDto cadastrarClienteDto)
+        {
+            Response<List<Models.Cliente>> response = new Response<List<Models.Cliente>>();
+
+            try
+            {
+                var cliente = new Models.Cliente()
+                {
+                    Nome = cadastrarClienteDto.Nome
+                };
+
+                _context.Add(cliente);
+                await _context.SaveChangesAsync();
+
+                response.Dados = await _context.Clientes.ToListAsync();
+                response.Mensagem = "item do Pedido adicionado com sucesso!";
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Mensagem = ex.Message;
+                response.Status = false;
+
+                return response;
+            }
+        }
+
         public async Task<Response<Models.Cliente>> ListarClientePorId(int id)
         {
             Response<Models.Cliente> response = new Response<Models.Cliente>();

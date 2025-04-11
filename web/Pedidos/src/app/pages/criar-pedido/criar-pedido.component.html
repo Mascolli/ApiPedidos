@@ -1,4 +1,58 @@
-<p>criar-pedido works!</p>
-<div>
-    <app-formulario></app-formulario>
+<div class="container mt-5">
+  <h1>Criar pedidos</h1>
+  <form>
+    <div class="mt-3">
+      <label for="cliente" class="form-label">Cliente</label>
+      <select class="form-select" id="cliente" [(ngModel)]="clienteSelecionado" (ngModelChange)="onClienteSelecionado($event)" name="cliente">
+        <option value="" disabled selected>Selecione um cliente</option>
+        @for (cliente of clientes; track cliente.id) {
+          <option [value]="cliente.id">
+            {{ cliente.nome }}
+          </option>
+        }
+        @empty {
+          <option disabled>Nenhum cliente encontrado</option>
+        }
+      </select>
+    </div>
+
+    <div class="mt-3">
+      <label for="item" class="form-label">Itens do Pedido</label>
+      <select class="form-select" id="item" [(ngModel)]="itemSelecionado" name="item">
+        <option value="" disabled selected>Selecione um item</option>
+        @for (item of itensList; track item.id) {
+          <option [value]="item.id">
+            {{ item.nome }}
+          </option>
+        }
+        @empty {
+          <option disabled>Nenhum item encontrado</option>
+        }
+      </select>
+      <button type="button" class="btn btn-sm btn-outline-success mt-2" (click)="adicionarItemAoPedido()">Adicionar Item</button>
+    </div>
+
+    <div class="mt-3">
+      <h3>Itens no Pedido:</h3>
+      @if (itensPedido.length > 0) {
+        <ul>
+          @for (item of itensPedido; track $index) {
+            <li>Nome: {{ item.nome }} - Quantidade: {{ item.quantidade }} - Preço Unitário: {{ item.precoUnitario }}</li>
+          }
+        </ul>
+      } @else {
+        <p class="text-center">Nenhum item adicionado ao pedido.</p>
+      }
+    </div>
+
+    <div class="mt-3">
+      <label for="valorTotal" class="form-label">Valor Total do Pedido:</label>
+      <input type="text" class="form-control" id="valorTotal" [value]="valorTotalPedido !== null ? (valorTotalPedido | currency:'BRL':'symbol':'1.2-2':'pt-BR') : ''" readonly>
+    </div>
+
+    <div class="d-flex mt-3">
+      <button class="btn btn-success w-50 me-5 mx-1" type="submit" (click)="salvarPedido()">Salvar</button>
+      <a class="btn btn-info w-50" [routerLink]="['/']">Voltar</a>
+    </div>
+  </form>
 </div>

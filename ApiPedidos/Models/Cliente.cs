@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ApiPedidos.Models
 {
@@ -9,5 +10,13 @@ namespace ApiPedidos.Models
         [Required]
         [StringLength(100)]
         public string Nome { get; set; } = string.Empty;
+        [JsonIgnore]
+        public ICollection<Pedido> Pedidos { get; set; }
+
+        public Cliente()
+        {
+            Pedidos = new List<Pedido>();
+        }
+
     }
 }

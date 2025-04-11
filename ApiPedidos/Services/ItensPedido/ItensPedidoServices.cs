@@ -21,7 +21,7 @@ namespace ApiPedidos.Services.ItensPedido
             {
                 var itemPedido = new Models.ItensPedido()
                 {
-                    NomeProduto = itemPedidoCriacaoDto.NomeProduto,
+                    Nome = itemPedidoCriacaoDto.Nome,
                     PedidoId = itemPedidoCriacaoDto.PedidoId,
                     Quantidade = itemPedidoCriacaoDto.Quantidade,
                     PrecoUnitario = itemPedidoCriacaoDto.PrecoUnitario

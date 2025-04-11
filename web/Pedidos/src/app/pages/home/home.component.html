@@ -1,8 +1,15 @@
 <div class="container mt-5">
-    <button class="btn btn-success w-100" [routerLink]="['/criar-pedido']">Criar novo pedido.</button>
+    <button class="btn btn-success w-40 me-5" [routerLink]="['/criar-pedido']">Criar novo pedido</button>
+    <button class="btn btn-success w-30 me-5" [routerLink]="['/criar-item-pedido']">Cadastrar itens</button>
+    <button class="btn btn-success w-30 me-5" [routerLink]="['/cadastro-cliente']">Cadastrar cliente</button>
     <div>
-        <label class="form-label">Pesquisar:</label>
-        <input class="form-control" type="text" placeholder="Qual pedido deseja buiscar?"(input)="search($event)"/>
+        <label class="form-label">Filtrar por Status:</label>
+        <select class="form-select" [(ngModel)]="filtroStatus">
+            <option [value]="null">Todos os Status</option>
+            @for (status of pedidoStatusOptions; track status.value) {
+            <option [value]="status.value">{{ status.key }}</option>
+            }
+        </select>
     </div>
 
     <table class="table table-hover table-bordered mt-5">
@@ -15,34 +22,40 @@
                 <th></th>
             </tr>
         </thead>
-
         <tbody>
-
-            @if(pedidos.length > 0){
-
-                @for (item of pedidosComNome; track item.pedido.id) {
-
-                    <tr>
-                        <td>{{item.nomeCliente}}</td>                        
-                        <td>{{getStatusNome(item.pedido.status)}}</td>
-                        <td>{{item.pedido.dataCriacao | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{item.pedido.totalPedido}}</td>
-                        <td>
-                            <button class="btn btn-warning mx-2">Editar</button>
-                            <button class="btn btn-info mx-2">Detalhes</button>
-                            <button class="btn btn-danger mx-2" (click)="deletar(item.pedido.id!)">Excluir</button>
-
-                        </td>
-                    </tr>
-                }
-
+            @if (filtrarPedidosPorStatus().length > 0) {
+            @for (item of filtrarPedidosPorStatus(); track item.pedido.id) {
+            <tr>
+                <td>{{ item.nomeCliente }}</td>
+                <td>{{ getStatusNome(item.pedido.status) }}</td>
+                <td>{{ item.pedido.dataCriacao | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ item.pedido.totalPedido }}</td>
+                <td>
+                    <button class="btn btn-warning mx-2" (click)="abrirModal()">Alterar Status</button>
+                    <button class="btn btn-info mx-2">Detalhes</button>
+                    <button class="btn btn-danger mx-2" (click)="deletar(item.pedido.id!)">Excluir</button>
+                </td>
+            </tr>
+            }
             } @else {
-                <tr class="text-center">
-                    <td colspan="7">Nenhum pedido encontrado.</td>
-                </tr>
-              }
-
+            <tr class="text-center">
+                <td colspan="7">Nenhum pedido encontrado.</td>
+            </tr>
+            }
         </tbody>
     </table>
-
 </div>
+
+<app-modal #statusModal modalId="alterarStatus" title="Alterar Status">
+    <div class="mb-3">
+        <label for="novoStatus" class="form-label">Selecione o Novo Status:</label>
+        <select class="form-select" #novoStatusSelect>
+            <option *ngFor="let status of pedidoStatusOptions" [value]="status.value">{{ status.key }}</option>
+        </select>
+    </div>
+    <ng-container footer>
+        <button type="button" class="btn btn-success me-2" (click)="alterarStatus(novoStatusSelect)">Salvar</button>
+        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal"
+            (click)="statusModal.hide()">Cancelar</button>
+    </ng-container>
+</app-modal>
